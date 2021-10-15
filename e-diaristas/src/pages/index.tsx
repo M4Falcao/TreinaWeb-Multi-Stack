@@ -9,8 +9,10 @@ import {
   ProfissionaisPaper,
   ProfissionaisContainer,
 } from "@styles/Pages/index.styled";
+import useIndex from "data/hooks/Pages/useIndex.page";
 
 const Home: NextPage = () => {
+  const { cep, setCep, cepValido } = useIndex();
   return (
     <div>
       <SafeEnvironment />
@@ -18,7 +20,6 @@ const Home: NextPage = () => {
         title="Conheça os profissionais"
         subtitle="Preencha com seu endereço e veja os profissionais de sua localidade"
       />
-
       <Container>
         <FormElementContainer>
           <TextFieldMask
@@ -26,7 +27,10 @@ const Home: NextPage = () => {
             label="Digite seu CEP"
             fullWidth
             mask={"99.999-999"}
+            value={cep}
+            onChange={(event) => setCep(event.target.value)}
           />
+
           <Typography color={"error"}>CEP invalido</Typography>
           <Button
             variant={"contained"}
